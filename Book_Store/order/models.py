@@ -14,14 +14,22 @@ class Order(models.Model):
                       ('1', 'registered')]
 
     owner = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, related_name='orders')
-    address = models.CharField(max_length=300, choices=ADDRESS_CHOICES)
+    address = models.CharField(max_length=300, choices=ADDRESS_CHOICES, blank=True)
     register_date = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='0')
     created = models.DateTimeField(auto_now_add=True)
-    # total_price = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.owner.username} {self.status} on {self.register_date}'
+
+    def original_price(self):
+        pass
+
+    def discount(self):
+        pass
+
+    def final_price(self):
+        pass
 
 
 class OrderDetail(models.Model):
@@ -35,7 +43,6 @@ class OrderDetail(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
-    @property
     def price(self):
         return self.number_of_books * self.book.price
 

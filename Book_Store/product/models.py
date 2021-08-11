@@ -6,8 +6,10 @@ class Category(models.Model):
     Category model:
     it has many to many relation with Book model
     """
+
     class Meta:
         verbose_name_plural = 'Categories'
+
     name = models.CharField(max_length=40)
 
     def __str__(self):
@@ -39,3 +41,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    def discount(self):
+        pass
+
+    def final_price(self):
+        pass

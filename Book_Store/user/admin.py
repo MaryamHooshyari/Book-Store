@@ -7,7 +7,7 @@ class EmployeeAdmin(admin.ModelAdmin):
 
 
 class CustomerAdmin(admin.ModelAdmin):
-    fields = ('username', 'email', 'password', 'groups')
+    fields = ('username', 'email', 'password', 'address', 'groups')
 
 
 admin.site.register(Employee, EmployeeAdmin)
