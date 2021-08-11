@@ -9,7 +9,7 @@ class Order(models.Model):
     Order model:
     ADDRESS_CHOICES: choice field contains all addresses belongs to owner
     """
-    ADDRESS_CHOICES = 'Customer.addresses'
+    ADDRESS_CHOICES = []
     STATUS_CHOICES = [('0', 'in progress'),
                       ('1', 'registered')]
 

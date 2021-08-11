@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import PercentOff, AmountOff, BonusOff
 
-# Register your models here.
+admin.site.register(PercentOff)
+admin.site.register(AmountOff)
+admin.site.register(BonusOff)
