@@ -8,7 +8,8 @@ class Category(models.Model):
     """
 
     class Meta:
-        verbose_name_plural = 'Categories'
+        verbose_name = 'دسته بندی'
+        verbose_name_plural = 'دسته بندی ها'
 
     name = models.CharField(max_length=40)
 
@@ -21,6 +22,11 @@ class Author(models.Model):
     Author model:
     it has many to many relation with Book model
     """
+
+    class Meta:
+        verbose_name = 'نویسنده'
+        verbose_name_plural = 'نویسنده ها'
+
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
 
@@ -32,18 +38,22 @@ class Book(models.Model):
     """
     Book model:
     """
+
+    class Meta:
+        verbose_name = 'کتاب'
+        verbose_name_plural = 'کتاب ها'
+
     title = models.CharField(max_length=100)
     number_in_stock = models.PositiveIntegerField()
     authors = models.ManyToManyField(Author, related_name='books')
     categories = models.ManyToManyField(Category, related_name='books')
-    price = models.PositiveIntegerField()
+    unit_price = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
 
-    def discount(self):
-        pass
-
-    def final_price(self):
-        pass
+    @property
+    def calculate_final_price(self):
+        result = self.unit_price - self.book_off.discount_price
+        return result
