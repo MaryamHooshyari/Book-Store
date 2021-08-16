@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.template.defaultfilters import slugify
 
 
 class CustomUser(AbstractUser):
@@ -10,12 +11,15 @@ class CustomUser(AbstractUser):
 
     username = models.CharField(max_length=150, unique=False)
     email = models.EmailField(unique=True, blank=False)
+    slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
         return self.email
 
     def save(self, *args, **kwargs):
         self.set_password(self.password)
+        if not self.slug:
+            self.slug = slugify(self.email[:len(str(self.email))-3])
         super(CustomUser, self).save(*args, **kwargs)
 
 

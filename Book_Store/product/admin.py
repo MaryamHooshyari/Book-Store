@@ -1,6 +1,21 @@
 from django.contrib import admin
-from .models import Category, Author, Book
+from .models.book import Book
+from .models.category import Category
+from .models.author import Author
 
-admin.site.register(Book)
-admin.site.register(Category)
-admin.site.register(Author)
+
+class BookAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('title',)}
+
+
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+
+
+class AuthorAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('first_name', 'last_name')}
+
+
+admin.site.register(Book, BookAdmin)
+admin.site.register(Category, CategoryAdmin)
+admin.site.register(Author, AuthorAdmin)

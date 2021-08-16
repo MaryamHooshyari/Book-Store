@@ -1,7 +1,7 @@
 import pytz
 from datetime import datetime
 from django.db import models
-from product.models import Book
+from product.models.book import Book
 from user.models.accounts import Customer
 
 
