@@ -19,13 +19,13 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4" aria-label="Main navigation">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">فروشگاه کتاب مکتب</a>
+          <a class="navbar-brand ms-3" href="{% url 'home' %}">فروشگاه کتاب مکتب</a>
 
           <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
 
-            <form class="d-flex mx-auto" style="width: 700px;">
-              <input class="form-control me-2" type="search" placeholder="عنوان مورد نظرتان را جستجو نمایید..." aria-label="SearchBar">
-              <button class="btn btn-outline-warning" type="submit">Search</button>
+            <form class="d-flex mx-auto" style="width: 700px;" action="{% url 'search_result' %}" method="get">
+              <input class="form-control me-2" name="searchbar" type="search" placeholder="عنوان مورد نظرتان را جستجو نمایید...">
+              <button class="btn btn-outline-warning" type="submit">جستجو</button>
             </form>
 
             <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
@@ -58,7 +58,7 @@
     </div>
 
 
-    <main class="container-fluid">
+    <main class="container">
         {% block content %}
 
         {% endblock content %}

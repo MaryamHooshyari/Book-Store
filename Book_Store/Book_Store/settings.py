@@ -58,10 +58,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Book_Store.urls'
 
+# templates directories
+BASE_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+PRODUCT_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'product'), 'templates')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_TEMPLATES_DIR, PRODUCT_TEMPLATES_DIR, ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

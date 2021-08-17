@@ -14,7 +14,7 @@ class Author(models.Model):
         verbose_name_plural = 'نویسنده ها'
 
     first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50, blank=True)
     slug = models.SlugField(null=False, unique=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
