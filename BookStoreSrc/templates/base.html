@@ -1,0 +1,118 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.rtl.min.css"
+          integrity="sha384-XfhC/Sid4FIGSXYebcOtcSCRFkd/zZzAMVipf0bNWucloRvcKK2/dpVWodQbQ1Ek" crossorigin="anonymous">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static './css/base.css' %}">
+
+    <title>{% block title %}base{% endblock title %}</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4" aria-label="Main navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-3" href="{% url 'home' %}">فروشگاه کتاب مکتب</a>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+
+            <form class="d-flex mx-auto" style="width: 700px;" action="#" method="get">
+                <input class="form-control me-2" name="searchbar" type="search"
+                       placeholder="عنوان مورد نظرتان را جستجو نمایید...">
+                <button class="btn btn-outline-warning" type="submit">جستجو</button>
+            </form>
+
+            <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-custom" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                       aria-expanded="false">کاربر</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        {% if user.is_authenticated %}
+                            <li><a class="dropdown-item" href="#">سلام{{ user.username }}</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">خروج</a></li>
+                        {% else %}
+                            <li><a class="dropdown-item" href="{% url 'login' %}">ورود</a></li>
+                            <li><a class="dropdown-item" href="{% url 'signup' %}">عضویت</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-custom" href="#">سبد خرید</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+<div class="nav-scroller bg-body shadow-sm">
+    <nav class="nav nav-underline bg-custom" aria-label="Secondary navigation">
+        <a class="nav-link text-custom" aria-current="page" href="#">دسته بندی ها:</a>
+        <a class="nav-link text-custom" href="#"> رمان ایرانی</a>
+        <a class="nav-link text-custom" href="#">رمان خارجی</a>
+        <a class="nav-link text-custom" href="#">نمایشنامه</a>
+        <a class="nav-link text-custom" href="#">شعر</a>
+        <a class="nav-link text-custom" href="#">کودک و نوجوان</a>
+        <a class="nav-link text-custom" href="#">Link</a>
+        <a class="nav-link text-custom" href="#">Link</a>
+    </nav>
+</div>
+
+
+<main class="container">
+    {% block content %}
+
+    {% endblock content %}
+</main>
+
+
+<footer class="bd-footer pt-5 mt-5 bg-custom">
+    <div class="container-fluid text-light">
+        <div class="row">
+            <div class="col-6 col-lg-2 offset-lg-1 text-dark">
+                <h6>لینک ها</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a class="text-dark" href="#">درباره ما</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">راهنمای خرید</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">قوانین و مقررات</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">سیاست حفظ حریم شخصی</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2 text-dark">
+                <h6>خدمات مشتریان</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a class="text-dark" href="#">تماس با ما</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">کد های تخفیف</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">انتقادات و پیشنهادات</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-5 ms-auto text-end">
+                <h5>در شبکه های اجتماعی با ما همراه باشید</h5>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
