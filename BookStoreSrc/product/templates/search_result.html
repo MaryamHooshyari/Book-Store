@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}نتیجه جستجو{% endblock title %}
+
+{% block content %}
+
+<br><br><h2 class="">کتاب ها</h2><hr class="bg-custom p-1">
+{% if books %}
+    {% for book in books %}
+        <div class="ms-3"><a class="text-link" href="">{{ book.title }}</a></div>
+    {% endfor %}
+{% else %}
+    <p class="ms-2">مورد مشابه یافت نشد</p>
+{% endif %}
+
+<br><br><h2>دسته بندی ها</h2><hr class="bg-custom p-1">
+{% if categories %}
+    {% for cat in categories %}
+        <div class="ms-3"><a class="text-link" href="">{{ cat.name }}</a></div>
+    {% endfor %}
+{% else %}
+    <p class="ms-2">مورد مشابه یافت نشد</p>
+{% endif %}
+
+<br><br><h2>نویسنده ها</h2><hr class="bg-custom p-1">
+{% if authors %}
+    {% for author in authors %}
+        <div class="ms-3"><a class="text-link" href="">{{ author.full_name }}</a></div>
+    {% endfor %}
+{% else %}
+    <p class="ms-2">مورد مشابه یافت نشد</p>
+{% endif %}
+
+{% endblock content %}
