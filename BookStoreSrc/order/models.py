@@ -1,14 +1,15 @@
-import pytz
 from datetime import datetime
+
+import pytz
+
+from accounts.models import Customer
 from django.db import models
 from product.models.book import Book
-from accounts.models import Customer
 
 
 class Order(models.Model):
     """
     Order model:
-    STATUS_CHOICES: has two values, 0 means still in progress and 1 means it has registered
     """
 
     class Meta:

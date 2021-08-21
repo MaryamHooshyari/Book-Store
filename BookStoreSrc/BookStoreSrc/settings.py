@@ -60,11 +60,18 @@ ROOT_URLCONF = 'BookStoreSrc.urls'
 # templates directories
 BASE_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 ACCOUNTS_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'accounts'), 'templates')
+PRODUCT_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'product'), 'templates')
+ORDER_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'order'), 'templates')
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_TEMPLATES_DIR, ACCOUNTS_TEMPLATES_DIR, ],
+        'DIRS': [
+            BASE_TEMPLATES_DIR,
+            ACCOUNTS_TEMPLATES_DIR,
+            PRODUCT_TEMPLATES_DIR,
+            ORDER_TEMPLATES_DIR,
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,6 +79,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'product.context_processors.categories',
+                'order.context_processors.cart',
             ],
         },
     },

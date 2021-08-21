@@ -1,5 +1,6 @@
-import pytz
 from datetime import datetime
+
+import pytz
 
 from django.db import models
 from product.models.book import Book

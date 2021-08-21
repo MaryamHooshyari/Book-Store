@@ -1,8 +1,9 @@
 from django.urls import path
+
+from .views.author import AuthorDetail, AuthorList
+from .views.book import BookDetail, BookList
+from .views.category import CategoryDetail, CategoryList
 from .views.search import SearchResultsView
-from .views.book import BookList, BookDetail
-from .views.author import AuthorList, AuthorDetail
-from .views.category import CategoryList, CategoryDetail
 
 # search
 urlpatterns = [

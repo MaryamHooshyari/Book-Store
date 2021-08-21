@@ -1,7 +1,8 @@
 from django.contrib import admin
+
+from .models.author import Author
 from .models.book import Book
 from .models.category import Category
-from .models.author import Author
 
 
 @admin.register(Book)

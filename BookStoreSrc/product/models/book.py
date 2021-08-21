@@ -1,6 +1,7 @@
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+
 from .author import Author
 from .category import Category
 
@@ -16,8 +17,8 @@ class Book(models.Model):
 
     title = models.CharField(max_length=100)
     number_in_stock = models.PositiveIntegerField()
-    authors = models.ManyToManyField(Author, related_name='books')
-    categories = models.ManyToManyField(Category, related_name='books')
+    authors = models.ManyToManyField(Author, related_name='book_author')
+    categories = models.ManyToManyField(Category, related_name='book_category')
     unit_price = models.PositiveIntegerField()
     slug = models.SlugField(null=False, allow_unicode=True, unique=True)
     updated = models.DateTimeField(auto_now=True)

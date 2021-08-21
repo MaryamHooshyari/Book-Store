@@ -4,15 +4,13 @@
 
 {% block content %}
 <div class="container">
-    <h2 class="text-info">{{author.full_name}}</h2>
+    <br><h2 class="">{{author.full_name}}</h2><br>
     <div class="list-group">
-        {% for book in all %}
-            {% if book.author.full_name == author.full_name %}
-                <a class="list-group-item list-group-item-action list-group-item-info"
-                   href="{% url 'book_detail' %}">
+        {% for book in books %}
+                <a class="list-group-item list-group-item-action list-group-item-success"
+                   href="{{ book.get_absolute_url }}">
                     {{ book.title }}
                 </a>
-            {% endif %}
         {% endfor %}
     </div>
 </div>

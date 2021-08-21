@@ -1,7 +1,8 @@
 from django.db.models import Q
 from django.views.generic import ListView
-from ..models.book import Book
+
 from ..models.author import Author
+from ..models.book import Book
 from ..models.category import Category
 
 

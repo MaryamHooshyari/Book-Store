@@ -1,5 +1,5 @@
-from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth import get_user_model
+from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
 
 """This method will return the currently active user model - CustomUser model in this case"""
