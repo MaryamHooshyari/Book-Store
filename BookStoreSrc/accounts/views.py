@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -8,3 +9,12 @@ class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     success_url = reverse_lazy('login')
     template_name = 'registration/signup.html'
+
+
+def login_redirect(request):
+    if request.user.is_superuser:
+        return redirect('admin_panel')
+    elif not request.user.is_superuser and request.user.is_staff:
+        return redirect('staff_panel')
+    else:
+        return redirect('home')

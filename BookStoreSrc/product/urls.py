@@ -3,10 +3,16 @@ from django.urls import path
 from .views.author import AuthorDetail, AuthorList
 from .views.book import BookDetail, BookList
 from .views.category import CategoryDetail, CategoryList
+from .views.home import HomeView
 from .views.search import SearchResultsView
 
-# search
+# home
 urlpatterns = [
+    path('', HomeView.as_view(), name='home')
+]
+
+# search
+urlpatterns += [
     path('search/', SearchResultsView.as_view(), name='search_result')
 ]
 

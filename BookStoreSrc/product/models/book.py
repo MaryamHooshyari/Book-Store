@@ -29,7 +29,7 @@ class Book(models.Model):
 
     @property
     def final_price(self):
-        result = self.unit_price - self.book_off.discount_price
+        result = self.unit_price - self.book_off.discount_price()
         return result
 
     def get_absolute_url(self):

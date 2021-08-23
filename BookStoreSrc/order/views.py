@@ -1,10 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views.generic import ListView, DetailView
-
-from .models import Order
-from .cart import Cart
+from django.views.generic import DetailView, ListView
 from product.models.book import Book
+
+from .cart import Cart
+from .models import Order
 
 
 def cart_add(request):

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}فروشگاه کتاب مکتب{% endblock title %}
+
+{% block content %}
+<div class="container p-4">
+    <h3 class="pb-2 border-bottom">پرطرفدارها</h3>
+    <div class="row g-4 py-4 row-cols-1 row-cols-md-3 row-cols-lg-4">
+        {% for book in more_sold %}
+        <div class="feature col text-center">
+            <div class="feature-icon bg-custom bg-gradient">
+                <svg class="bi" width="1em" height="1em"></svg>
+            </div>
+            <h4 class="mt-2"><a class="text-decoration-none text-link" href="{{ book.get_absolute_url }}">{{ book.title }}</a></h4>
+            <br><br>
+            <p>{% for author in book.authors.all %}
+                <a class="text-decoration-none text-link" href="{{ author.get_absolute_url }}">{{ author.full_name }}</a>
+                {% endfor %}
+            </p>
+            <p>{{ book.unit_price }}</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container p-4">
+    <h3 class="pb-2 border-bottom">تازه ها</h3>
+    <div class="row g-4 py-4 row-cols-1 row-cols-md-3 row-cols-lg-4">
+        {% for book in fresh %}
+        <div class="feature col text-center">
+            <div class="feature-icon bg-custom bg-gradient">
+                <svg class="bi" width="1em" height="1em"></svg>
+            </div>
+            <h4 class="mt-2"><a class="text-decoration-none text-link" href="{{ book.get_absolute_url }}">{{ book.title }}</a></h4>
+            <br><br>
+            <p>{% for author in book.authors.all %}
+                <a class="text-decoration-none text-link" href="{{ author.get_absolute_url }}">{{ author.full_name }}</a>
+                {% endfor %}
+            </p>
+            <p>{{ book.unit_price }}</p>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}
