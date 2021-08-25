@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.rtl.min.css"
+          integrity="sha384-XfhC/Sid4FIGSXYebcOtcSCRFkd/zZzAMVipf0bNWucloRvcKK2/dpVWodQbQ1Ek" crossorigin="anonymous">
+
+    <!-- Local CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static './css/base.css' %}">
+
+    <title>{% block title %}base{% endblock title %}</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4" aria-label="Main navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-3" href="{% url 'staff_home' %}">پنل کارمندان</a>
+
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+
+            <form class="d-flex mx-auto" style="width: 700px;" action="{% url 'search_result' %}" method="get">
+                <input class="form-control me-2" name="searchbar" type="search"
+                       placeholder="عنوان مورد نظرتان را جستجو نمایید...">
+                <button class="btn btn-outline-warning" type="submit">جستجو</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div class="nav-scroller bg-body shadow-sm">
+    <nav class="nav nav-underline bg-custom" aria-label="Secondary navigation">
+        <a class="nav-link text-custom" aria-current="page" href="{% url 'category_list' %}">دسته بندی ها</a>
+        {% if default_categories %}
+        {% for cat in default_categories %}
+        <a class="nav-link text-custom" href="{{ cat.get_absolute_url }}">{{cat.name}}</a>
+        {% endfor %}
+        {% endif %}
+    </nav>
+</div>
+
+
+<main class="container">
+    {% block content %}
+
+    {% endblock content %}
+</main>
+
+
+<footer class="bd-footer pt-5 mt-5 bg-custom">
+    <div class="container-fluid text-light">
+        <div class="row">
+            <div class="col-6 col-lg-2 offset-lg-1 text-dark">
+                <h6>لینک ها</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a class="text-dark" href="#">درباره ما</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">راهنمای خرید</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">قوانین و مقررات</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">سیاست حفظ حریم شخصی</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2 text-dark">
+                <h6>خدمات مشتریان</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a class="text-dark" href="#">تماس با ما</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">کد های تخفیف</a></li>
+                    <li class="mb-2"><a class="text-dark" href="#">انتقادات و پیشنهادات</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-lg-2 text-dark">
+                <h6>محصولات</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a class="text-dark" href="{% url 'book_list' %}">کتاب ها</a></li>
+                    <li class="mb-2"><a class="text-dark" href="{% url 'category_list' %}">دسته بندی ها</a></li>
+                    <li class="mb-2"><a class="text-dark" href="{% url 'author_list' %}">نویسنده ها</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-5 text-end">
+                <h5>در شبکه های اجتماعی با ما همراه باشید</h5>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Optional JavaScript; choose one of the two! -->
+
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+<!--
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+-->
+</body>
+</html>
