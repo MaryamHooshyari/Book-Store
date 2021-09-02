@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }}{% endblock title %}
+
+{% block content %}
+<br><p>نام کاربری: {{user.username}}</p>
+<p>ایمیل: {{user.email}}</p>
+<a class="btn btn-outline-dark" href="{% url 'address_list' user.pk %}">آدرس های من</a>
+<a class="btn btn-outline-dark" href="{% url 'order_list' user.pk %}">سفارش های من</a>
+<hr>
+<a class="btn btn-outline-danger" href="{% url 'logout' %}">خروج از حساب کاربری</a>
+<a class="btn btn-outline-warning" href="#">تغییر رمز عبور</a>
+{% endblock content %}

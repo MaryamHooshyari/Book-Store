@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }} آدرس های{% endblock title %}
+
+{% block content %}
+<br>
+<h2>آدرس ها</h2>
+<ul>
+{% for address in addresses %}
+<li>
+{% if address.is_default %}
+<span>آدرس اصلی: </span>
+{% endif %}
+    {{address.state}}, {{address.city}}, {{address.town}}, {{address.street}}, {{address.postal_code}}, {{address.details}}
+</li>
+{% endfor %}
+</ul>
+{% endblock content %}

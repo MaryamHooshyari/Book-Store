@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.username }} سفارش های{% endblock title %}
+
+{% block content %}
+<br>
+<h2>سفارش ها</h2>
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">وضعیت سفارش</th>
+        <th scope="col">تاریخ سفارش</th>
+        <th scope="col">تعداد آیتم</th>
+        <th scope="col">جمع فاکتور</th>
+        <th scope="col">جزییات</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+    <tr>
+        <th scope="row">{{ order.status }}</th>
+        <td>{{ order.created }}</td>
+        <td>{{ order.items.count }}</td>
+        <td>{{ order.original_price }}</td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-warning" href="">مشاهده جزییات</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

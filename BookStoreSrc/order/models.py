@@ -28,11 +28,12 @@ class Order(models.Model):
     def __str__(self):
         return f'{self.status} for {self.owner.username}'
 
+    @property
     def original_price(self):
         """
         return: <int>
         """
-        return sum(item.price for item in self.items.all())
+        return sum(item.item_price for item in self.items.all())
 
     def discount(self):
         """

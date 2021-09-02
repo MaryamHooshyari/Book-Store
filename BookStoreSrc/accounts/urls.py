@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import SignUpView, StaffHome, login_redirect
+from .views import SignUpView, StaffHome, login_redirect, CustomerDetail, AddressList, OrderList
 
 urlpatterns = [
     path('login_redirect/', login_redirect, name='login_redirect'),
@@ -17,4 +17,10 @@ urlpatterns += [
 
 urlpatterns += [
     path('staff/', StaffHome.as_view(), name='staff_home'),
+]
+
+urlpatterns += [
+    path('customer/<slug>', CustomerDetail.as_view(), name='user_detail'),
+    path('customer/<int:pk>/addresses/', AddressList.as_view(), name='address_list'),
+    path('customer/<int:pk>/orders/', OrderList.as_view(), name='order_list'),
 ]
