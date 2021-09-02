@@ -19,23 +19,26 @@ class BookDiscount(models.Model):
 
     start_date = models.DateTimeField()
     expire_date = models.DateTimeField()
-    percent = models.FloatField()
-    amount = models.FloatField()
+    percent = models.IntegerField()
+    amount = models.IntegerField()
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book_off')
     created = models.DateTimeField(auto_now_add=True)
 
     def is_valid(self):
-        pass
-        # if self.start_date < datetime.now(pytz.timezone('Asia/Tehran') < self.expire_date:
-        #     return True
-        # else:
-        #     return False
+        if self.start_date < datetime.now(pytz.timezone('Asia/Tehran')) < self.expire_date:
+            return True
+        else:
+            return False
 
     @property
     def discount_price(self):
-        if self.book.unit_price > self.amount:
-            result = ((self.book.unit_price - self.amount) * (100 - self.percent)) / 100
-            return result
+        if self.is_valid():
+            percentage = (self.book.unit_price * self.percent) / 100
+            if self.book.unit_price - percentage > self.amount:
+                result = percentage + self.amount
+                return result
+            else:
+                return 0
         else:
             return 0
 

@@ -1,8 +1,49 @@
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, ListView, UpdateView)
 
+from ..forms.category import CategoryCreateForm, CategoryUpdateForm
 from ..models.category import Category
 
 
+# staff panel
+class StaffCategory(ListView):
+    model = Category
+    template_name = 'category/staff_category.html'
+
+
+class StaffCategoryDetail(DetailView):
+    model = Category
+    template_name = 'category/staff_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['category'] = self.model.objects.get(slug=self.kwargs.get('slug'))
+        context['books'] = context['category'].book_category.all()
+        return context
+
+
+class CategoryCreate(CreateView):
+    form_class = CategoryCreateForm
+    model = Category
+    template_name = 'category/create.html'
+    success_url = reverse_lazy('staff_category')
+
+
+class CategoryUpdate(UpdateView):
+    form_class = CategoryUpdateForm
+    model = Category
+    template_name = 'category/edit.html'
+    success_url = reverse_lazy('staff_category')
+
+
+class CategoryDelete(DeleteView):
+    model = Category
+    template_name = 'category/delete.html'
+    success_url = reverse_lazy('staff_category')
+
+
+# customer panel
 class CategoryList(ListView):
     model = Category
     template_name = 'category/list.html'

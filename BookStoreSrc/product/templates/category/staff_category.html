@@ -1,0 +1,30 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}دسته بندی ها{% endblock title %}
+
+{% block content %}
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">نام دسته بندی</th>
+        <th scope="col">تعداد کتاب مرتبط</th>
+        <th scope="col">ویرایش/حذف</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for cat in object_list %}
+    <tr>
+        <th scope="row"><a class="text-light" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></th>
+        <td>{{ cat.book_category.count }}</td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-success">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger">حذف</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

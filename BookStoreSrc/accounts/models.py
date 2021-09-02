@@ -32,3 +32,21 @@ class Customer(CustomUser):
         proxy = True
         verbose_name = 'مشتری'
         verbose_name_plural = 'مشتری ها'
+
+
+class Address(models.Model):
+    class Meta:
+        verbose_name = 'آدرس'
+        verbose_name_plural = 'آدرس ها'
+
+    owner = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='address')
+    state = models.CharField(max_length=30)
+    city = models.CharField(max_length=50)
+    town = models.CharField(max_length=50, blank=True, null=True)
+    street = models.CharField(max_length=50)
+    postal_code = models.IntegerField(blank=True, null=True)
+    details = models.CharField(max_length=200, blank=True, null=True)
+    is_default = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.owner} from {self.city} in {self.state}'

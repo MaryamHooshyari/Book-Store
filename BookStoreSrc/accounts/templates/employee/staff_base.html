@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -15,14 +13,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.rtl.min.css"
           integrity="sha384-XfhC/Sid4FIGSXYebcOtcSCRFkd/zZzAMVipf0bNWucloRvcKK2/dpVWodQbQ1Ek" crossorigin="anonymous">
 
-    <!-- Local CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static './css/base.css' %}">
 
     <title>{% block title %}base{% endblock title %}</title>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4" aria-label="Main navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4" aria-label="Main navigation">
     <div class="container-fluid">
         <a class="navbar-brand ms-3" href="{% url 'staff_home' %}">پنل کارمندان</a>
 
@@ -36,14 +32,14 @@
         </div>
     </div>
 </nav>
+
 <div class="nav-scroller bg-body shadow-sm">
-    <nav class="nav nav-underline bg-custom" aria-label="Secondary navigation">
-        <a class="nav-link text-custom" aria-current="page" href="{% url 'category_list' %}">دسته بندی ها</a>
-        {% if default_categories %}
-        {% for cat in default_categories %}
-        <a class="nav-link text-custom" href="{{ cat.get_absolute_url }}">{{cat.name}}</a>
-        {% endfor %}
-        {% endif %}
+    <nav class="nav nav-underline bg-dark" aria-label="Secondary navigation">
+        <a class="nav-link text-light" aria-current="page" href="{% url 'category_create' %}">افزودن دسته بندی</a>
+        <a class="nav-link text-light" aria-current="page" href="{% url 'author_create' %}">افزودن نویسنده</a>
+        <a class="nav-link text-light" aria-current="page" href="{% url 'book_create' %}">افزودن کتاب</a>
+        <a class="nav-link text-light" aria-current="page" href="#">افزودن تخفیف کتاب</a>
+        <a class="nav-link text-light" aria-current="page" href="#">افزودن تخفیف امتیازی</a>
     </nav>
 </div>
 
@@ -55,37 +51,27 @@
 </main>
 
 
-<footer class="bd-footer pt-5 mt-5 bg-custom">
+<footer class="bd-footer pt-5 mt-5 bg-dark">
     <div class="container-fluid text-light">
         <div class="row">
-            <div class="col-6 col-lg-2 offset-lg-1 text-dark">
-                <h6>لینک ها</h6>
+            <div class="col-6 col-lg-2 offset-lg-1">
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-dark" href="#">درباره ما</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">راهنمای خرید</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">قوانین و مقررات</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">سیاست حفظ حریم شخصی</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'staff_home' %}">کتاب ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'staff_author' %}">نویسنده ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'staff_category' %}">دسته بندی ها</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-lg-2 text-dark">
-                <h6>خدمات مشتریان</h6>
+            <div class="col-6 col-lg-2">
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-dark" href="#">تماس با ما</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">کد های تخفیف</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">انتقادات و پیشنهادات</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">تخفیف های کتاب</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">تخفیف های امتیازی</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-lg-2 text-dark">
-                <h6>محصولات</h6>
+            <div class="col-6 col-lg-2">
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-dark" href="{% url 'book_list' %}">کتاب ها</a></li>
-                    <li class="mb-2"><a class="text-dark" href="{% url 'category_list' %}">دسته بندی ها</a></li>
-                    <li class="mb-2"><a class="text-dark" href="{% url 'author_list' %}">نویسنده ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">مشتری ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">ارتباط با ادمین</a></li>
                 </ul>
-            </div>
-            <div class="col-12 col-lg-5 text-end">
-                <h5>در شبکه های اجتماعی با ما همراه باشید</h5>
-
             </div>
         </div>
     </div>

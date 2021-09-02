@@ -1,0 +1,48 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}{{category.name}}{% endblock title %}
+
+{% block content %}
+<br>
+<h2 class="">{{category.name}}</h2><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">نام کتاب</th>
+        <th scope="col">نویسنده ها</th>
+        <th scope="col">دسته بندی ها</th>
+        <th scope="col">قیمت</th>
+        <th scope="col">موجودی انبار</th>
+        <th scope="col">ویرایش/حذف</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <th scope="row">{{ book.title }}</th>
+        <td>{% for author in book.authors.all %}
+            <a class="text-light" href="{% url 'staff_author_detail' author.slug %}">{{ author.full_name }}</a>
+            {% endfor %}
+        </td>
+        <td>{% for category in book.categories.all %}
+            <a class="text-light" href="{% url 'staff_category_detail' category.slug %}">{{ category.name }}</a>
+            {% endfor %}
+        </td>
+        <td>{{ book.unit_price }}</td>
+        <td>{{ book.number_in_stock }}</td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-success" href="{% url 'book_edit' book.pk %}">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger" href="{% url 'book_delete' book.pk %}">حذف</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<div class="btn-group" role="group" aria-label="Default button group">
+    <a type="button" class="btn btn-success" href="{% url 'category_edit' category.pk %}">ویرایش دسته بندی</a>
+    <a type="button" class="btn btn-danger" href="{% url 'category_delete' category.pk %}">حذف دسته بندی</a>
+</div>
+{% endblock content %}

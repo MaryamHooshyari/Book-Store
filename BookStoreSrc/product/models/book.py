@@ -19,7 +19,8 @@ class Book(models.Model):
     number_in_stock = models.PositiveIntegerField()
     authors = models.ManyToManyField(Author, related_name='book_author')
     categories = models.ManyToManyField(Category, related_name='book_category')
-    unit_price = models.PositiveIntegerField()
+    unit_price = models.IntegerField()
+    # final_price = models.IntegerField(default=0)
     slug = models.SlugField(null=False, allow_unicode=True, unique=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -29,13 +30,21 @@ class Book(models.Model):
 
     @property
     def final_price(self):
-        result = self.unit_price - self.book_off.discount_price()
-        return result
+        total_discount = 0
+        for x in self.book_off.all():
+            total_discount += x.discount_price
+        if self.unit_price > total_discount:
+            return int(self.unit_price - total_discount)
 
     def get_absolute_url(self):
         return reverse('book_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
+        # total_discount = 0
+        # for x in self.book_off.all():
+        #     total_discount += x.discount_price
+        # if self.unit_price > total_discount:
+        #     self.final_price = self.unit_price - total_discount
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)

@@ -5,3 +5,6 @@
 
 #### Second Phase
 ##### search bar, managers, login and register has been added. cart and discount parts should be added soon:)
+
+#### Third Phase
+##### customize admin, staff panel, customer panel

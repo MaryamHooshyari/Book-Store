@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView
-
 from product.models.book import Book
+
 from .forms import CustomUserCreationForm
 
 
@@ -16,7 +16,7 @@ def login_redirect(request):
     if request.user.is_superuser:
         return redirect('admin_panel')
     elif request.user.is_staff:
-        return redirect('staff_panel')
+        return redirect('staff_home')
     else:
         return redirect('home')
 

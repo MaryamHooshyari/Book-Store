@@ -1,0 +1,30 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}نویسنده ها{% endblock title %}
+
+{% block content %}
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">نام نویسنده</th>
+        <th scope="col">تعداد کتاب مرتبط</th>
+        <th scope="col">ویرایش/حذف</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for author in object_list %}
+    <tr>
+        <th scope="row"><a class="text-light" href="{% url 'staff_author_detail' author.slug %}">{{ author.full_name }}</a></th>
+        <td>{{ author.book_author.count }}</td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-success">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger">حذف</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

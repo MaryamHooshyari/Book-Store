@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import Customer, CustomUser, Employee
+from .models import Customer, CustomUser, Employee, Address
 
 
 class CustomUserAdmin(UserAdmin):
@@ -31,3 +31,8 @@ class CustomerAdmin(CustomUserAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Customer, CustomerAdmin)
+
+
+@admin.register(Address)
+class AddressAdmin(admin.ModelAdmin):
+    list_display = ['owner', 'state', 'city', 'town', 'street', 'postal_code', 'is_default']

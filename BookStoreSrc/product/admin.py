@@ -7,7 +7,7 @@ from .models.category import Category
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ['title', 'unit_price', 'number_in_stock']
+    list_display = ['title', 'unit_price', 'number_in_stock', 'final_price']
     list_editable = ['unit_price', 'number_in_stock']
     prepopulated_fields = {'slug': ('title',)}
 

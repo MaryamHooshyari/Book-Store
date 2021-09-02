@@ -1,8 +1,33 @@
-from django.views.generic import DetailView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, ListView, UpdateView)
 
+from ..forms.book import BookCreateForm, BookUpdateForm
 from ..models.book import Book
 
 
+# staff panel
+class BookCreate(CreateView):
+    form_class = BookCreateForm
+    model = Book
+    template_name = 'book/create.html'
+    success_url = reverse_lazy('staff_home')
+
+
+class BookUpdate(UpdateView):
+    form_class = BookUpdateForm
+    model = Book
+    template_name = 'book/edit.html'
+    success_url = reverse_lazy('staff_home')
+
+
+class BookDelete(DeleteView):
+    model = Book
+    template_name = 'book/delete.html'
+    success_url = reverse_lazy('staff_home')
+
+
+# customer panel
 class BookList(ListView):
     model = Book
     template_name = 'book/list.html'

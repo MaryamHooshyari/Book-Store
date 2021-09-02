@@ -1,4 +1,4 @@
-{% load static %}
+<!--{% load static %}-->
 
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
@@ -16,13 +16,13 @@
           integrity="sha384-XfhC/Sid4FIGSXYebcOtcSCRFkd/zZzAMVipf0bNWucloRvcKK2/dpVWodQbQ1Ek" crossorigin="anonymous">
 
     <!-- Local CSS -->
-    <link rel="stylesheet" type="text/css" href="{% static './css/base.css' %}">
+<!--    <link rel="stylesheet" type="text/css" href="{% static './css/base.css' %}">-->
 
     <title>{% block title %}base{% endblock title %}</title>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-custom py-4" aria-label="Main navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4" aria-label="Main navigation">
     <div class="container-fluid">
         <a class="navbar-brand ms-3" href="{% url 'home' %}">فروشگاه کتاب مکتب</a>
 
@@ -36,7 +36,7 @@
 
             <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
                 <li class="nav-item dropdown me-3">
-                    <a class="nav-link dropdown-toggle text-custom" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle text-warning" href="#" id="dropdown01" data-bs-toggle="dropdown"
                        aria-expanded="false">کاربر</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
                         {% if user.is_authenticated %}
@@ -71,12 +71,16 @@
     </div>
 </nav>
 <div class="nav-scroller bg-body shadow-sm">
-    <nav class="nav nav-underline bg-custom" aria-label="Secondary navigation">
-        <a class="nav-link text-custom" aria-current="page" href="{% url 'category_list' %}">دسته بندی ها</a>
+    <nav class="nav nav-underline bg-dark" aria-label="Secondary navigation">
+        <a class="nav-link dropdown-toggle text-light" aria-current="page" href="#"
+           id="dropdown02" data-bs-toggle="dropdown" aria-expanded="false">
+            دسته بندی ها</a>
         {% if default_categories %}
+        <ul class="dropdown-menu" aria-labelledby="dropdown02">
         {% for cat in default_categories %}
-        <a class="nav-link text-custom" href="{{ cat.get_absolute_url }}">{{cat.name}}</a>
+        <li><a class="dropdown-item nav-link text-dark" href="{{ cat.get_absolute_url }}">{{cat.name}}</a></li>
         {% endfor %}
+        </ul>
         {% endif %}
     </nav>
 </div>
@@ -89,32 +93,32 @@
 </main>
 
 
-<footer class="bd-footer pt-5 mt-5 bg-custom">
+<footer class="bd-footer pt-5 mt-5 bg-dark">
     <div class="container-fluid text-light">
         <div class="row">
-            <div class="col-6 col-lg-2 offset-lg-1 text-dark">
+            <div class="col-6 col-lg-2 offset-lg-1 text-light">
                 <h6>لینک ها</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-dark" href="#">درباره ما</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">راهنمای خرید</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">قوانین و مقررات</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">سیاست حفظ حریم شخصی</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">درباره ما</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">راهنمای خرید</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">قوانین و مقررات</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">سیاست حفظ حریم شخصی</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-lg-2 text-dark">
+            <div class="col-6 col-lg-2 text-light">
                 <h6>خدمات مشتریان</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-dark" href="#">تماس با ما</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">کد های تخفیف</a></li>
-                    <li class="mb-2"><a class="text-dark" href="#">انتقادات و پیشنهادات</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">تماس با ما</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">کد های تخفیف</a></li>
+                    <li class="mb-2"><a class="text-light" href="#">انتقادات و پیشنهادات</a></li>
                 </ul>
             </div>
-            <div class="col-6 col-lg-2 text-dark">
+            <div class="col-6 col-lg-2 text-light">
                 <h6>محصولات</h6>
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-dark" href="{% url 'book_list' %}">کتاب ها</a></li>
-                    <li class="mb-2"><a class="text-dark" href="{% url 'category_list' %}">دسته بندی ها</a></li>
-                    <li class="mb-2"><a class="text-dark" href="{% url 'author_list' %}">نویسنده ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'book_list' %}">کتاب ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'category_list' %}">دسته بندی ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'author_list' %}">نویسنده ها</a></li>
                 </ul>
             </div>
             <div class="col-12 col-lg-5 text-end">
