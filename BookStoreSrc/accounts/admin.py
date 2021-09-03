@@ -25,7 +25,7 @@ class EmployeeAdmin(CustomUserAdmin):
 
 class CustomerAdmin(CustomUserAdmin):
     def get_queryset(self, request):
-        return CustomUser.objects.filter(is_staff=False).filter(is_superuser=False)
+        return CustomUser.objects.filter(is_staff=False)
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}ویرایش آدرس{% endblock title %}
+
+{% block content %}
+  <br><h2>ویرایش آدرس</h2><br>
+  <form action="" method="post">
+    {% csrf_token %}
+
+    {{ form|crispy }}
+    <br><input class="btn btn-success" type="submit" value="ویرایش">
+  </form>
+{% endblock content %}

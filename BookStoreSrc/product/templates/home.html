@@ -11,7 +11,7 @@
             <div class="feature-icon bg-dark bg-gradient">
                 <svg class="bi" width="1em" height="1em"></svg>
             </div>
-            <h4 class="mt-2"><a class="text-decoration-none text-dark" href="{{ book.get_absolute_url }}">
+            <h4 class="mt-2 h-25"><a class="text-decoration-none text-dark" href="{{ book.get_absolute_url }}">
                 {{book.title}}</a></h4>
             <br><br>
             <p>{% for author in book.authors.all %}
@@ -19,10 +19,8 @@
                 {% endfor %}
             </p>
             {% if book.unit_price == book.final_price %}
-            <br>
             <p class="fw-bold ms-4">{{ book.unit_price }}</p>
             {% else %}
-            <br>
             <p class="text-decoration-line-through ms-4">{{ book.unit_price }}</p>
             <p class="fw-bold ms-4">{{ book.final_price }}</p>
             {% endif %}
@@ -39,7 +37,7 @@
             <div class="feature-icon bg-dark bg-gradient">
                 <svg class="bi" width="1em" height="1em"></svg>
             </div>
-            <h4 class="mt-2"><a class="text-decoration-none text-dark" href="{{ book.get_absolute_url }}">
+            <h4 class="mt-2 h-25"><a class="text-decoration-none text-dark" href="{{ book.get_absolute_url }}">
                 {{book.title}}</a></h4>
             <br><br>
             <p>{% for author in book.authors.all %}

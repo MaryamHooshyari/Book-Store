@@ -5,9 +5,13 @@
 {% block content %}
 <br><p>نام کاربری: {{user.username}}</p>
 <p>ایمیل: {{user.email}}</p>
-<a class="btn btn-outline-dark" href="{% url 'address_list' user.pk %}">آدرس های من</a>
-<a class="btn btn-outline-dark" href="{% url 'order_list' user.pk %}">سفارش های من</a>
+<a class="btn btn-outline-dark" href="{% url 'address_list' user.slug %}">آدرس های من</a>
+<a class="btn btn-outline-dark" href="{% url 'order_list' user.slug %}">سفارش های من</a>
+<a class="btn btn-outline-dark" href="{% url 'customer_edit' user.slug %}">ویرایش اطلاعات شخصی</a>
 <hr>
-<a class="btn btn-outline-danger" href="{% url 'logout' %}">خروج از حساب کاربری</a>
-<a class="btn btn-outline-warning" href="#">تغییر رمز عبور</a>
+<a class="btn btn-danger" href="{% url 'logout' %}">خروج از حساب کاربری</a>
+<a class="btn btn-warning" href="#">تغییر رمز عبور</a>
+<hr><hr><br>
+<a class="btn btn-outline-danger" href="{% url 'customer_delete' user.slug %}">حذف حساب کاربری</a>
+
 {% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}مشتریان{% endblock title %}
+
+{% block content %}
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">نام کاربری</th>
+        <th scope="col">ایمیل</th>
+        <th scope="col">آدرس ها</th>
+        <th scope="col">سفارشات</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for customer in object_list %}
+    <tr>
+        <th scope="row">{{ customer.username }}</th>
+        <td>{{ customer.email }}</td>
+        <td><a href="{% url 'address_list' customer.slug %}">{{ customer.address.count }}</a></td>
+        <td><a href="{% url 'order_list' customer.slug %}">{{ customer.orders.count }}</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

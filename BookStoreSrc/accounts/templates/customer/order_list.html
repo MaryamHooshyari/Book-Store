@@ -25,7 +25,7 @@
         <td>{{ order.original_price }}</td>
         <td>
             <div class="btn-group" role="group" aria-label="Default button group">
-                <a type="button" class="btn btn-outline-warning" href="">مشاهده جزییات</a>
+                <a type="button" class="btn btn-outline-warning" href="{% url 'order_detail' order.pk %}">مشاهده جزییات</a>
             </div>
         </td>
     </tr>

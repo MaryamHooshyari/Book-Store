@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}{{object.username}}{% endblock title %}
+
+{% block content %}
+  <br><h3>{{object.username}} عزیز</h3><br>
+  <form action="" method="post">
+      {% csrf_token %}
+      <p>آیا می خواهید حساب کاربری خود را حذف کنید؟</p>
+      <input class="btn btn-danger" type="submit" value="تایید">
+  </form>
+{% endblock content %}

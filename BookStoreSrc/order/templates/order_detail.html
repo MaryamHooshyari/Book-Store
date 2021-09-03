@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ order.status }}{% endblock title %}
+
+{% block content %}
+<br>
+<h2>{{ order.owner.username }} {{ order.status }}</h2>
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">محصول</th>
+        <th scope="col">قیمت واحد</th>
+        <th scope="col">قیمت با تخفیف</th>
+        <th scope="col">تعداد</th>
+        <th scope="col">قیمت کل</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in details %}
+    <tr>
+        <th scope="row">{{ item.book.title }}</th>
+        <td>{{ item.book.unit_price }}</td>
+        <td>{{ item.book.final_price }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.item_price }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

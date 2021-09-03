@@ -65,6 +65,7 @@ BASE_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 ACCOUNTS_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'accounts'), 'templates')
 PRODUCT_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'product'), 'templates')
 ORDER_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'order'), 'templates')
+DISCOUNT_TEMPLATES_DIR = os.path.join(os.path.join(BASE_DIR, 'discount'), 'templates')
 
 TEMPLATES = [
     {
@@ -74,6 +75,7 @@ TEMPLATES = [
             ACCOUNTS_TEMPLATES_DIR,
             PRODUCT_TEMPLATES_DIR,
             ORDER_TEMPLATES_DIR,
+            DISCOUNT_TEMPLATES_DIR,
         ],
         'APP_DIRS': True,
         'OPTIONS': {

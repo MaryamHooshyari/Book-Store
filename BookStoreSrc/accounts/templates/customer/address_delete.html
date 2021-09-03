@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}حذف آدرس{% endblock title %}
+
+{% block content %}
+  <br><h3>{{object.owner.username}} عزیز</h3><br>
+  <form action="" method="post">
+      {% csrf_token %}
+      <p>آیا می خواهید آدرس "{{object.state}}, {{object.city}}, {{object.street}}, {{object.postal_code}}" را حذف کنید؟</p>
+      <input class="btn btn-danger" type="submit" value="تایید">
+  </form>
+{% endblock content %}

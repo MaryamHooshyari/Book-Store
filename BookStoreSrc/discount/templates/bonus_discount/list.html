@@ -1,0 +1,45 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}تخفیف های امتیازی{% endblock title %}
+
+{% block content %}
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">کد تخفیف</th>
+        <th scope="col">تاریخ شروع</th>
+        <th scope="col">تاریخ انقضا</th>
+        <th scope="col">مبلغ ماکسیموم</th>
+        <th scope="col">درصد تخفیف</th>
+        <th scope="col">تعداد استفاده مجاز</th>
+        <th scope="col">فعال</th>
+        <th scope="col">ویرایش/حذف</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for bonus in object_list %}
+    <tr>
+        <th scope="row">{{ bonus.coupon }}</th>
+        <td>{{ bonus.start_date }}</td>
+        <td>{{ bonus.expire_date }}</td>
+        <td>{{ bonus.amount }}</td>
+        <td>{{ bonus.percent }}</td>
+        <td>{{ bonus.limited_count }}</td>
+        <td>{% if bonus.as_active %}
+            +
+            {% else %}
+            -
+            {% endif %}
+        </td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-success" href="{% url 'bonus_discount_edit' bonus.pk %}">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger" href="{% url 'bonus_discount_delete' bonus.pk %}">حذف</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,12 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}{{object.username}}{% endblock title %}
+
+{% block content %}
+  <br><h3>حذف کارمند</h3><br>
+  <form action="" method="post">
+      {% csrf_token %}
+      <p>آیا می خواهید کارمند "{{ object.username }}" را حذف کنید؟</p>
+      <input class="btn btn-danger" type="submit" value="تایید">
+  </form>
+{% endblock content %}

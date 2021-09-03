@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 from product.models.book import Book
 
 from .cart import Cart
-from .models import Order
+from .models import Order, OrderItem
 
 
 def cart_add(request):
@@ -23,3 +23,14 @@ def cart_add(request):
 class CartItems(ListView):
     model = Order
     template_name = 'cart_items.html'
+
+
+class OrderItemList(DetailView):
+    model = Order
+    template_name = 'order_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order'] = self.model.objects.get(id=self.kwargs.get('pk'))
+        context['details'] = context['order'].items.all()
+        return context

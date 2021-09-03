@@ -2,26 +2,40 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import (AddressList, CustomerDetail, OrderList, SignUpView,
-                    StaffHome, login_redirect)
+from .views.all_user_related import SignUpView, login_redirect
+from .views.customer import CustomerDetail, AddressList, OrderList, CustomerList, CustomerUpdate, CustomerDelete, AddressCreate, AddressUpdate, AddressDelete
+from .views.employee import StaffHome, StaffList, StaffCreate, StaffUpdate, StaffDelete
 
+# all users
 urlpatterns = [
     path('login_redirect/', login_redirect, name='login_redirect'),
     path('signup/', SignUpView.as_view(), name='signup'),
 ]
 
+# admin
 urlpatterns += [
-    path('admin-panel/', TemplateView.as_view(template_name='admin/admin_panel.html'), name='admin_panel'),
-    path('admin-panel/django-admin/', admin.site.urls),
-    path('admin-panel/report/', TemplateView.as_view(template_name='admin/admin_report.html'), name='admin_report'),
+    path('admin/django-admin/', admin.site.urls),
+    path('admin/report/', TemplateView.as_view(template_name='admin/admin_report.html'), name='admin_report'),
 ]
 
+# staff
 urlpatterns += [
     path('staff/', StaffHome.as_view(), name='staff_home'),
+    path('staff/all/', StaffList.as_view(), name='staff_list'),
+    path('staff/create/', StaffCreate.as_view(), name='staff_create'),
+    path('staff/edit/<int:pk>', StaffUpdate.as_view(), name='staff_edit'),
+    path('staff/delete/<int:pk>', StaffDelete.as_view(), name='staff_delete'),
 ]
 
+# customer
 urlpatterns += [
     path('customer/<slug>', CustomerDetail.as_view(), name='user_detail'),
-    path('customer/<int:pk>/addresses/', AddressList.as_view(), name='address_list'),
-    path('customer/<int:pk>/orders/', OrderList.as_view(), name='order_list'),
+    path('customer/<slug>/addresses/', AddressList.as_view(), name='address_list'),
+    path('customer/addresses/create/', AddressCreate.as_view(), name='address_create'),
+    path('customer/<slug>/addresses/edit/<int:pk>', AddressUpdate.as_view(), name='address_edit'),
+    path('customer/<slug>/addresses/delete/<int:pk>', AddressDelete.as_view(), name='address_delete'),
+    path('customer/<slug>/orders/', OrderList.as_view(), name='order_list'),
+    path('customer/all/', CustomerList.as_view(), name='customer_list'),
+    path('customer/<slug>/edit/', CustomerUpdate.as_view(), name='customer_edit'),
+    path('customer/<slug>/delete/', CustomerDelete.as_view(), name='customer_delete'),
 ]

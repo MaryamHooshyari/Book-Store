@@ -1,0 +1,36 @@
+{% extends 'employee/staff_base.html' %}
+
+{% block title %}تخفیف کتاب ها{% endblock title %}
+
+{% block content %}
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">کتاب</th>
+        <th scope="col">تاریخ شروع</th>
+        <th scope="col">تاریخ انقضا</th>
+        <th scope="col">تخفیف نقدی</th>
+        <th scope="col">تخفیف درصدی</th>
+        <th scope="col">ویرایش/حذف</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book_dis in object_list %}
+    <tr>
+        <th scope="row">{{ book_dis.book.title }}</th>
+        <td>{{ book_dis.start_date }}</td>
+        <td>{{ book_dis.expire_date }}</td>
+        <td>{{ book_dis.amount }}</td>
+        <td>{{ book_dis.percent }}</td>
+        <td>
+            <div class="btn-group" role="group" aria-label="Default button group">
+                <a type="button" class="btn btn-outline-success" href="{% url 'book_discount_edit' book_dis.pk %}">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger" href="{% url 'book_discount_delete' book_dis.pk %}">حذف</a>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock content %}

@@ -15,12 +15,11 @@ class Book(models.Model):
         verbose_name = 'کتاب'
         verbose_name_plural = 'کتاب ها'
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=50)
     number_in_stock = models.PositiveIntegerField()
     authors = models.ManyToManyField(Author, related_name='book_author')
     categories = models.ManyToManyField(Category, related_name='book_category')
     unit_price = models.IntegerField()
-    # final_price = models.IntegerField(default=0)
     slug = models.SlugField(null=False, allow_unicode=True, unique=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

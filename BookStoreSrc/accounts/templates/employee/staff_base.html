@@ -20,7 +20,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-4" aria-label="Main navigation">
     <div class="container-fluid">
-        <a class="navbar-brand ms-3" href="{% url 'staff_home' %}">پنل کارمندان</a>
+        <a class="navbar-brand ms-3" href="{% url 'staff_home' %}">
+            {% if user.is_superuser %}
+            پنل ادمین
+            {% else %}
+            پنل کارمندان
+            {% endif %}
+        </a>
 
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
 
@@ -36,11 +42,23 @@
 
 <div class="nav-scroller bg-body shadow-sm">
     <nav class="nav nav-underline bg-dark" aria-label="Secondary navigation">
-        <a class="nav-link text-light" aria-current="page" href="{% url 'category_create' %}">افزودن دسته بندی</a>
-        <a class="nav-link text-light" aria-current="page" href="{% url 'author_create' %}">افزودن نویسنده</a>
-        <a class="nav-link text-light" aria-current="page" href="{% url 'book_create' %}">افزودن کتاب</a>
-        <a class="nav-link text-light" aria-current="page" href="#">افزودن تخفیف کتاب</a>
-        <a class="nav-link text-light" aria-current="page" href="#">افزودن تخفیف امتیازی</a>
+        <a class="nav-link text-light" aria-current="page" href="#"
+           id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">
+            دسترسی ها</a>
+        <ul class="dropdown-menu" aria-labelledby="dropdown03">
+            <li><a class="nav-link text-dark" aria-current="page" href="{% url 'category_create' %}">افزودن دسته بندی</a></li>
+            <li><a class="nav-link text-dark" aria-current="page" href="{% url 'author_create' %}">افزودن نویسنده</a></li>
+            <li><a class="nav-link text-dark" aria-current="page" href="{% url 'book_create' %}">افزودن کتاب</a></li>
+            <li><a class="nav-link text-dark" aria-current="page" href="{% url 'book_discount_create' %}">افزودن تخفیف کتاب</a></li>
+            <li><a class="nav-link text-dark" aria-current="page" href="{% url 'bonus_discount_create' %}">افزودن تخفیف امتیازی</a></li>
+            {% if user.is_superuser %}
+            <li><a class="nav-link text-dark" aria-current="page" href="{% url 'staff_create' %}">افزودن کارمند</a></li>
+            {% endif %}
+        </ul>
+        {% if user.is_superuser %}
+        <a class="nav-link text-light" href="{% url 'admin_report' %}">گزارش گیری</a>
+        <a class="nav-link text-light" href="{% url 'admin:index' %}">جنگو ادمین</a>
+        {% endif %}
     </nav>
 </div>
 
@@ -64,14 +82,18 @@
             </div>
             <div class="col-6 col-lg-2">
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-light" href="#">تخفیف های کتاب</a></li>
-                    <li class="mb-2"><a class="text-light" href="#">تخفیف های امتیازی</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'book_discount_list' %}">تخفیف های کتاب</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'bonus_discount_list' %}">تخفیف های امتیازی</a></li>
                 </ul>
             </div>
             <div class="col-6 col-lg-2">
                 <ul class="list-unstyled">
-                    <li class="mb-2"><a class="text-light" href="#">مشتری ها</a></li>
+                    <li class="mb-2"><a class="text-light" href="{% url 'customer_list' %}">مشتری ها</a></li>
+                    {% if user.is_superuser %}
+                    <li class="mb-2"><a class="text-light" href="{% url 'staff_list' %}">کارمند ها</a></li>
+                    {% else %}
                     <li class="mb-2"><a class="text-light" href="#">ارتباط با ادمین</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
