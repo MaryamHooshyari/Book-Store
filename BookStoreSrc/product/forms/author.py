@@ -1,6 +1,6 @@
 from django import forms
-from product.models.author import Author
 from django.utils.translation import gettext_lazy as _
+from product.models.author import Author
 
 
 class AuthorCreateForm(forms.ModelForm):

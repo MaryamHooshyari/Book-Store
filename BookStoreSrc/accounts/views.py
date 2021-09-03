@@ -1,11 +1,11 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView, DetailView
-from product.models.book import Book
-from .models import Customer, Address
+from django.views.generic import CreateView, DetailView, ListView
 from order.models import Order
+from product.models.book import Book
 
 from .forms import CustomUserCreationForm
+from .models import Address, Customer
 
 
 class SignUpView(CreateView):

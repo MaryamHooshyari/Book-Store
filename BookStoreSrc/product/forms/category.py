@@ -1,6 +1,6 @@
 from django import forms
-from product.models.category import Category
 from django.utils.translation import gettext_lazy as _
+from product.models.category import Category
 
 
 class CategoryCreateForm(forms.ModelForm):

@@ -2,6 +2,7 @@ from datetime import datetime
 
 import pytz
 
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from product.models.book import Book
 
@@ -19,8 +20,8 @@ class BookDiscount(models.Model):
 
     start_date = models.DateTimeField()
     expire_date = models.DateTimeField()
-    percent = models.IntegerField()
-    amount = models.IntegerField()
+    percent = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99)])
+    amount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book_off')
     created = models.DateTimeField(auto_now_add=True)
 
@@ -46,7 +47,6 @@ class BookDiscount(models.Model):
         return f'{self.percent} percent off till {self.expire_date}'
 
 
-# todo: add validator
 class BonusDiscount(models.Model):
     """
     Bonus Off model:
@@ -61,8 +61,9 @@ class BonusDiscount(models.Model):
     coupon = models.CharField(max_length=20, null=False, blank=False, unique=True)
     start_date = models.DateTimeField()
     expire_date = models.DateTimeField()
-    amount = models.FloatField(blank=True, null=True)
-    percent = models.FloatField(blank=True, null=True)
+    amount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    percent = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99)])
+    limited_count = models.IntegerField(default=10)
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
 
@@ -72,3 +73,12 @@ class BonusDiscount(models.Model):
     def deactivate(self):
         self.is_active = False
         self.save()
+
+    def is_valid(self):
+        if self.limited_count > 0 and self.is_active:
+            if self.start_date < datetime.now(pytz.timezone('Asia/Tehran')) < self.expire_date:
+                return True
+            else:
+                return False
+        else:
+            return False

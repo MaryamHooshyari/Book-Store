@@ -1,6 +1,6 @@
 from django import forms
-from product.models.book import Book
 from django.utils.translation import gettext_lazy as _
+from product.models.book import Book
 
 
 class BookCreateForm(forms.ModelForm):

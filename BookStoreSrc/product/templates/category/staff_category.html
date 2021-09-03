@@ -15,12 +15,12 @@
     <tbody>
     {% for cat in object_list %}
     <tr>
-        <th scope="row"><a class="text-light" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a></th>
+        <th scope="row"><a class="text-light" href="{% url 'staff_category_detail' cat.slug %}">{{ cat.name }}</a></th>
         <td>{{ cat.book_category.count }}</td>
         <td>
             <div class="btn-group" role="group" aria-label="Default button group">
-                <a type="button" class="btn btn-outline-success">ویرایش</a>
-                <a type="button" class="btn btn-outline-danger">حذف</a>
+                <a type="button" class="btn btn-outline-success" href="{% url 'category_edit' cat.pk %}">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger" href="{% url 'category_delete' cat.pk %}">حذف</a>
             </div>
         </td>
     </tr>

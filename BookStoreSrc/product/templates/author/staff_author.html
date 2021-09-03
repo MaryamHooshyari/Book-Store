@@ -19,8 +19,8 @@
         <td>{{ author.book_author.count }}</td>
         <td>
             <div class="btn-group" role="group" aria-label="Default button group">
-                <a type="button" class="btn btn-outline-success">ویرایش</a>
-                <a type="button" class="btn btn-outline-danger">حذف</a>
+                <a type="button" class="btn btn-outline-success" href="{% url 'author_edit' author.pk %}">ویرایش</a>
+                <a type="button" class="btn btn-outline-danger" href="{% url 'author_delete' author.pk %}">حذف</a>
             </div>
         </td>
     </tr>

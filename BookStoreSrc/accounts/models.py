@@ -50,7 +50,7 @@ class Address(models.Model):
     street = models.CharField(max_length=50)
     postal_code = models.IntegerField(blank=True, null=True)
     details = models.CharField(max_length=200, blank=True, null=True)
-    is_default = models.BooleanField(default=True)
+    is_default = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.owner} from {self.city} in {self.state}'
+        return f'{self.owner.username} از {self.city} در {self.state}'

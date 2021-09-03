@@ -2,7 +2,8 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views import SignUpView, StaffHome, login_redirect, CustomerDetail, AddressList, OrderList
+from .views import (AddressList, CustomerDetail, OrderList, SignUpView,
+                    StaffHome, login_redirect)
 
 urlpatterns = [
     path('login_redirect/', login_redirect, name='login_redirect'),
