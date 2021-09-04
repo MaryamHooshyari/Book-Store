@@ -1,3 +1,6 @@
+from django.contrib import messages
+from django.shortcuts import render, redirect
+
 from accounts.permissions import UserAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -7,7 +10,7 @@ from ..forms import AddressForm, CustomUserChangeForm
 from ..models import Address, Customer
 
 
-# customer
+# for admin and staff
 class CustomerList(ListView):
     model = Customer
     template_name = 'customer/customer_list.html'
@@ -41,12 +44,14 @@ class OrderList(DetailView):
         return context
 
 
-# todo: reverse_lazy('user_detail')
 class CustomerUpdate(UpdateView):
     form_class = CustomUserChangeForm
     model = Customer
     template_name = 'customer/edit.html'
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        slug = self.request.user.slug
+        return reverse_lazy('user_detail', kwargs={'slug': slug})
 
 
 class CustomerDelete(DeleteView):
@@ -64,7 +69,19 @@ class AddressCreate(UserAccessMixin, CreateView):
     form_class = AddressForm
     model = Address
     template_name = 'customer/address_create.html'
-    success_url = reverse_lazy('home')
+
+    def post(self, request, *args, **kwargs):
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.owner = request.user
+            address.save()
+            slug = self.request.user.slug
+            return redirect('address_list', slug)
+        else:
+            messages.error(request, 'آدرس ثبت نشد:(')
+            form = AddressForm()
+            return render(request, 'customer/address_create.html', {'form': form})
 
 
 class AddressUpdate(UserAccessMixin, UpdateView):
@@ -74,7 +91,10 @@ class AddressUpdate(UserAccessMixin, UpdateView):
     form_class = AddressForm
     model = Address
     template_name = 'customer/address_edit.html'
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        slug = self.request.user.slug
+        return reverse_lazy('address_list', kwargs={'slug': slug})
 
 
 class AddressDelete(UserAccessMixin, DeleteView):
@@ -83,4 +103,7 @@ class AddressDelete(UserAccessMixin, DeleteView):
 
     model = Address
     template_name = 'customer/address_delete.html'
-    success_url = reverse_lazy('home')
+
+    def get_success_url(self):
+        slug = self.request.user.slug
+        return reverse_lazy('address_list', kwargs={'slug': slug})

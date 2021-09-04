@@ -15,60 +15,47 @@
             <a class="text-dark" href="{{ category.get_absolute_url }}">{{ category.name }}</a>
             {% endfor %}
         </li>
-        </ul>
-        {% if object.unit_price == object.final_price %}
-        <p class="fw-bold ms-5">{{ object.unit_price }} تومان</p>
-        {% else %}
-        <p class="text-decoration-line-through ms-5">{{ object.unit_price }} تومان</p>
-        <p class="fw-bold ms-5">{{ object.final_price }} تومان</p>
-        {% endif %}
+    </ul>
+    {% if object.unit_price == object.final_price %}
+    <p class="fw-bold ms-5">{{ object.unit_price }} تومان</p>
+    {% else %}
+    <p class="text-decoration-line-through ms-5">{{ object.unit_price }} تومان</p>
+    <p class="fw-bold ms-5">{{ object.final_price }} تومان</p>
+    {% endif %}
 
     <div>
         {% if object.number_in_stock > 0 %}
-            <div class="row">
+        <div class="row">
             <div class="col">
-                <label for="select" class="ms-3">تعداد</label>
-                <select id="select" class="me-3">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
+                <form action="{% url 'add_cart_item' %}" method="POST">
+                    {% csrf_token %}
+                    <label for="select" class="ms-3">تعداد</label>
+                    <select id="select" class="me-3" name="quantity" type="number">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <input value="{{object.id}}" class="d-none" name="book_id" type="number">
 
-                <button id="add_to_cart" value="{{object.id}}" type="button" class="btn btn-warning">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3"
-                         viewBox="0 0 16 16">
-                        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
-                    </svg>
-                    افزودن به سبد خرید
-                </button>
+                    <button type="submit" class="btn btn-warning">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-cart3"
+                             viewBox="0 0 16 16">
+                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                        </svg>
+                        افزودن به سبد خرید
+                    </button>
+                </form>
             </div>
         </div>
         {% else %}
-            <span class="fs-4 ms-3 btn btn-secondary disabled">ناموجود</span>
+        <span class="fs-4 ms-3 btn btn-secondary disabled">ناموجود</span>
         {% endif %}
     </div>
 
 
-
 </div>
-<script>
-    $(document).on('click', '#add_to_cart', function (e) {
-        e.preventDefault();
-        $.ajax({
-            type: 'POST',
-            url: {% url 'cart_add' %},
-            data: {
-                bookid: $('#add_to_cart').val(),
-                bookqty: $('#select option:selected').text(),
-                csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
-                action: 'post'
-            },
-            success: function (json) {
-                document.getElementById('cart-qty').innerHTML = json.qty;
-            },
-            error: function (xhr, errmsg, err) {}
-        });
-    })
-</script>
+
 {% endblock content %}

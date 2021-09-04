@@ -45,6 +45,6 @@
     </tbody>
 </table>
 <div class="btn-group" role="group" aria-label="Default button group">
-    <a type="button" class="btn btn-success" href="{% url 'address_create' %}">افزودن آدرس جدید</a>
+    <a type="button" class="btn btn-success" href="{% url 'address_create' user.slug %}">افزودن آدرس جدید</a>
 </div>
 {% endblock content %}

@@ -45,6 +45,7 @@ class StaffChangeForm(UserChangeForm):
 
 # address
 class AddressForm(forms.ModelForm):
+
     class Meta:
         model = Address
         fields = ('state', 'city', 'town', 'street', 'postal_code', 'details', 'is_default')

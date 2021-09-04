@@ -4,11 +4,16 @@
 {% block title %}افزودن آدرس{% endblock title %}
 
 {% block content %}
-    <br><h2>آدرس جدید</h2><br>
-    <form action="" method="post">
+{% if messages %}
+{% for message in messages %}
+<p class="bg-danger p-2"> {{ message }} </p>
+{% endfor %}
+{% endif %}
+<br><h2>آدرس جدید</h2><br>
+<form action="" method="post">
     {% csrf_token %}
 
     {{ form|crispy }}
     <br><input class="btn btn-success" type="submit" value="ذخیره">
-    </form>
+</form>
 {% endblock content %}

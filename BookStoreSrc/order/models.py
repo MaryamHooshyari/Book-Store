@@ -72,7 +72,7 @@ class OrderItem(models.Model):
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='booksInItems')
-    quantity = models.PositiveIntegerField()
+    quantity = models.PositiveIntegerField(default=0)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 

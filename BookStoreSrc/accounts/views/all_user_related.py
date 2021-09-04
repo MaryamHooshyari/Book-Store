@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.models import Group
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
 from django.http import HttpResponse
@@ -28,6 +29,8 @@ def activate(req, uidb64, token):
         user = None
     if user and activation_token.check_token(user, token):
         user.is_active = True
+        gp = Group.objects.get(name='دسترسی مشتری')
+        user.groups.add(gp)
         user.save()
         messages.info(req, 'حساب کاربری شما فعال شد. وارد شوید:)')
         return redirect('login')
