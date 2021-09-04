@@ -10,7 +10,7 @@
 <a class="btn btn-outline-dark" href="{% url 'customer_edit' user.slug %}">ویرایش اطلاعات شخصی</a>
 <hr>
 <a class="btn btn-danger" href="{% url 'logout' %}">خروج از حساب کاربری</a>
-<a class="btn btn-warning" href="#">تغییر رمز عبور</a>
+<a class="btn btn-warning" href="{% url 'password_change' %}">تغییر رمز عبور</a>
 <hr><hr><br>
 <a class="btn btn-outline-danger" href="{% url 'customer_delete' user.slug %}">حذف حساب کاربری</a>
 
