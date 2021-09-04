@@ -55,9 +55,10 @@
             <li><a class="nav-link text-dark" aria-current="page" href="{% url 'staff_create' %}">افزودن کارمند</a></li>
             {% endif %}
         </ul>
+
+        <a class="nav-link text-light" href="{% url 'admin:index' %}">مدیریت جنگو</a>
         {% if user.is_superuser %}
         <a class="nav-link text-light" href="{% url 'admin_report' %}">گزارش گیری</a>
-        <a class="nav-link text-light" href="{% url 'admin:index' %}">جنگو ادمین</a>
         {% endif %}
     </nav>
 </div>

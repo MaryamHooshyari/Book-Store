@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 from product.models.book import Book
 
 from .cart import Cart
-from .models import Order, OrderItem
+from .models import Order
 
 
 def cart_add(request):

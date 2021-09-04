@@ -1,7 +1,10 @@
 from django.urls import reverse_lazy
-from django.views.generic import DetailView, ListView, UpdateView, DeleteView, CreateView
-from ..forms import CustomUserChangeForm, AddressForm
-from ..models import Customer, Address
+from django.views.generic import (
+    CreateView, DeleteView, DetailView, ListView, UpdateView)
+
+from ..forms import AddressForm, CustomUserChangeForm
+from ..models import Address, Customer
+from accounts.permissions import UserAccessMixin
 
 
 # customer
@@ -37,6 +40,7 @@ class OrderList(DetailView):
         context['orders'] = context['user'].orders.all()
         return context
 
+
 # todo: reverse_lazy('user_detail')
 class CustomerUpdate(UpdateView):
     form_class = CustomUserChangeForm
@@ -53,21 +57,30 @@ class CustomerDelete(DeleteView):
 
 # address
 # todo: reverse_lazy('address_list')
-class AddressCreate(CreateView):
+class AddressCreate(UserAccessMixin, CreateView):
+    raise_exception = False
+    permission_required = 'accounts.add_address'
+
     form_class = AddressForm
     model = Address
     template_name = 'customer/address_create.html'
     success_url = reverse_lazy('home')
 
 
-class AddressUpdate(UpdateView):
+class AddressUpdate(UserAccessMixin, UpdateView):
+    raise_exception = False
+    permission_required = 'accounts.change_address'
+
     form_class = AddressForm
     model = Address
     template_name = 'customer/address_edit.html'
     success_url = reverse_lazy('home')
 
 
-class AddressDelete(DeleteView):
+class AddressDelete(UserAccessMixin, DeleteView):
+    raise_exception = False
+    permission_required = 'accounts.delete_address'
+
     model = Address
     template_name = 'customer/address_delete.html'
     success_url = reverse_lazy('home')

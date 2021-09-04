@@ -1,4 +1,4 @@
-{% extends 'employee/staff_base.html' %}
+{% extends 'base.html' %}
 
 {% block title %}تخفیف های امتیازی{% endblock title %}
 
@@ -14,7 +14,6 @@
         <th scope="col">درصد تخفیف</th>
         <th scope="col">تعداد استفاده مجاز</th>
         <th scope="col">فعال</th>
-        <th scope="col">ویرایش/حذف</th>
     </tr>
     </thead>
     <tbody>
@@ -31,12 +30,6 @@
             {% else %}
             -
             {% endif %}
-        </td>
-        <td>
-            <div class="btn-group" role="group" aria-label="Default button group">
-                <a type="button" class="btn btn-outline-success" href="{% url 'bonus_discount_edit' bonus.pk %}">ویرایش</a>
-                <a type="button" class="btn btn-outline-danger" href="{% url 'bonus_discount_delete' bonus.pk %}">حذف</a>
-            </div>
         </td>
     </tr>
     {% endfor %}

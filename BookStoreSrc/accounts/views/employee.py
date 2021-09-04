@@ -1,8 +1,8 @@
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from product.models.book import Book
-from ..forms import StaffCreationForm, StaffChangeForm
 
+from ..forms import StaffChangeForm, StaffCreationForm
 from ..models import Employee
 
 

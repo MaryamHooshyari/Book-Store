@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import *
 
 urlpatterns = [
@@ -10,6 +11,7 @@ urlpatterns = [
 
     # bonus discount
     path('bonus-discount/all/', BonusDiscountList.as_view(), name='bonus_discount_list'),
+    path('bonus-discount/all/customer-view/', BonusDiscountListCustomer.as_view(), name='bonus_discount_customer_view'),
     path('bonus-discount/create/', BonusDiscountCreate.as_view(), name='bonus_discount_create'),
     path('bonus-discount/edit/<int:pk>', BonusDiscountUpdate.as_view(), name='bonus_discount_edit'),
     path('bonus-discount/delete/<int:pk>', BonusDiscountDelete.as_view(), name='bonus_discount_delete'),

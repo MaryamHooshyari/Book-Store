@@ -4,6 +4,7 @@ from django.views.generic import (
 
 from ..forms.author import AuthorCreateForm, AuthorUpdateForm
 from ..models.author import Author
+from accounts.permissions import UserAccessMixin
 
 
 # staff panel
@@ -23,21 +24,30 @@ class StaffAuthorDetail(DetailView):
         return context
 
 
-class AuthorCreate(CreateView):
+class AuthorCreate(UserAccessMixin, CreateView):
+    raise_exception = False
+    permission_required = 'product.add_author'
+
     form_class = AuthorCreateForm
     model = Author
     template_name = 'author/create.html'
     success_url = reverse_lazy('staff_author')
 
 
-class AuthorUpdate(UpdateView):
+class AuthorUpdate(UserAccessMixin, UpdateView):
+    raise_exception = False
+    permission_required = 'product.change_author'
+
     form_class = AuthorUpdateForm
     model = Author
     template_name = 'author/edit.html'
     success_url = reverse_lazy('staff_author')
 
 
-class AuthorDelete(DeleteView):
+class AuthorDelete(UserAccessMixin, DeleteView):
+    raise_exception = False
+    permission_required = 'product.delete_author'
+
     model = Author
     template_name = 'author/delete.html'
     success_url = reverse_lazy('staff_author')

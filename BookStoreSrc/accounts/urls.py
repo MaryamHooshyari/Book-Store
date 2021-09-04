@@ -3,11 +3,15 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from .views.all_user_related import SignUpView, login_redirect
-from .views.customer import CustomerDetail, AddressList, OrderList, CustomerList, CustomerUpdate, CustomerDelete, AddressCreate, AddressUpdate, AddressDelete
-from .views.employee import StaffHome, StaffList, StaffCreate, StaffUpdate, StaffDelete
+from .views.customer import (AddressCreate, AddressDelete, AddressList,
+                             AddressUpdate, CustomerDelete, CustomerDetail,
+                             CustomerList, CustomerUpdate, OrderList)
+from .views.employee import (StaffCreate, StaffDelete, StaffHome, StaffList,
+                             StaffUpdate)
 
 # all users
 urlpatterns = [
+    path('user/forbidden/', TemplateView.as_view(template_name='403_page.html'), name='403_page'),
     path('login_redirect/', login_redirect, name='login_redirect'),
     path('signup/', SignUpView.as_view(), name='signup'),
 ]

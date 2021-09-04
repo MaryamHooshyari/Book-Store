@@ -4,6 +4,7 @@ from django.views.generic import (
 
 from ..forms.category import CategoryCreateForm, CategoryUpdateForm
 from ..models.category import Category
+from accounts.permissions import UserAccessMixin
 
 
 # staff panel
@@ -23,21 +24,30 @@ class StaffCategoryDetail(DetailView):
         return context
 
 
-class CategoryCreate(CreateView):
+class CategoryCreate(UserAccessMixin, CreateView):
+    raise_exception = False
+    permission_required = 'product.add_category'
+
     form_class = CategoryCreateForm
     model = Category
     template_name = 'category/create.html'
     success_url = reverse_lazy('staff_category')
 
 
-class CategoryUpdate(UpdateView):
+class CategoryUpdate(UserAccessMixin, UpdateView):
+    raise_exception = False
+    permission_required = 'product.change_category'
+
     form_class = CategoryUpdateForm
     model = Category
     template_name = 'category/edit.html'
     success_url = reverse_lazy('staff_category')
 
 
-class CategoryDelete(DeleteView):
+class CategoryDelete(UserAccessMixin, DeleteView):
+    raise_exception = False
+    permission_required = 'product.delete_category'
+
     model = Category
     template_name = 'category/delete.html'
     success_url = reverse_lazy('staff_category')

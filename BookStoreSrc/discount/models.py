@@ -21,7 +21,7 @@ class BookDiscount(models.Model):
     start_date = models.DateTimeField()
     expire_date = models.DateTimeField()
     percent = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99)])
-    amount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    amount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100000)])
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book_off')
     created = models.DateTimeField(auto_now_add=True)
 
@@ -61,7 +61,7 @@ class BonusDiscount(models.Model):
     coupon = models.CharField(max_length=20, null=False, blank=False, unique=True)
     start_date = models.DateTimeField()
     expire_date = models.DateTimeField()
-    amount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    amount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100000)])
     percent = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(99)])
     limited_count = models.IntegerField(default=10)
     is_active = models.BooleanField(default=True)
