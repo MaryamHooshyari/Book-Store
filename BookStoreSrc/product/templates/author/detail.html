@@ -5,12 +5,33 @@
 {% block content %}
 <div class="container">
     <br><h2 class="">{{author.full_name}}</h2><br>
-    <div class="list-group">
+    <div class="row g-4 py-4 row-cols-1 row-cols-md-3 row-cols-lg-4">
         {% for book in books %}
-                <a class="list-group-item list-group-item-action list-group-item-dark"
-                   href="{{ book.get_absolute_url }}">
-                    {{ book.title }}
+        <div class="feature col text-center">
+            <div class="feature-icon bg-dark bg-gradient">
+                <svg class="bi" width="1em" height="1em"></svg>
+            </div>
+            <h4 class="mt-2 h-25"><a class="text-decoration-none text-dark" href="{{ book.get_absolute_url }}">
+                {{book.title}}</a></h4>
+            <br><br>
+            <p>{% for author in book.authors.all %}
+                <a class="text-decoration-none text-dark" href="{{ author.get_absolute_url }}">
+                    {{ author.full_name}}
                 </a>
+                {% endfor %}
+            </p>
+            <p>{% for cat in book.categories.all %}
+                <a class="text-dark" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+                {% endfor %}
+            </p>
+            {% if book.unit_price == book.final_price %}
+            <p class="fw-bold ms-4">{{ book.unit_price }}</p>
+            {% else %}
+            <p class="text-decoration-line-through ms-4">{{ book.unit_price }}</p>
+            <p class="fw-bold ms-4">{{ book.final_price }}</p>
+            {% endif %}
+            <br>
+        </div>
         {% endfor %}
     </div>
 </div>

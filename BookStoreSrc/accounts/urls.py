@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
 
-from .views.all_user_related import SignUpView, login_redirect
+from .views.all_user_related import login_redirect, signup, activate
 from .views.customer import (AddressCreate, AddressDelete, AddressList,
                              AddressUpdate, CustomerDelete, CustomerDetail,
                              CustomerList, CustomerUpdate, OrderList)
@@ -13,7 +13,8 @@ from .views.employee import (StaffCreate, StaffDelete, StaffHome, StaffList,
 urlpatterns = [
     path('user/forbidden/', TemplateView.as_view(template_name='403_page.html'), name='403_page'),
     path('login_redirect/', login_redirect, name='login_redirect'),
-    path('signup/', SignUpView.as_view(), name='signup'),
+    path('signup/user/', signup, name='signup'),
+    path('activate/<uidb64>/<token>/', activate, name='activate'),
 ]
 
 # admin
