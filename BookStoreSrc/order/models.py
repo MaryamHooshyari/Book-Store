@@ -39,16 +39,19 @@ class Order(models.Model):
         calculate discount on percent up to a certain amount
         return: <int, float>
         """
-        all_discounts = BonusDiscount.objects.all()
-        for dis in all_discounts:
-            if self.discount_code == dis.coupon:
-                my_discount = dis
-        if my_discount.is_valid():
-            discount_amount = (self.original_price * my_discount.percent) / 100
-            if discount_amount > my_discount.amount:
-                return my_discount.amount
-            else:
-                return discount_amount
+        if self.discount_code:
+            all_discounts = BonusDiscount.objects.all()
+            for dis in all_discounts:
+                if self.discount_code == dis.coupon:
+                    my_discount = dis
+                    if my_discount.is_valid():
+                        discount_amount = (self.original_price * my_discount.percent) / 100
+                        if discount_amount > my_discount.amount:
+                            return my_discount.amount
+                        else:
+                            return discount_amount
+                    else:
+                        return 0
         else:
             return 0
 
