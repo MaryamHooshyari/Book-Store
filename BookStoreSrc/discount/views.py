@@ -1,9 +1,9 @@
+from accounts.permissions import UserAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from .forms import *
 from .models import *
-from accounts.permissions import UserAccessMixin
 
 
 # book discount

@@ -1,10 +1,10 @@
+from accounts.permissions import UserAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView)
 
 from ..forms import AddressForm, CustomUserChangeForm
 from ..models import Address, Customer
-from accounts.permissions import UserAccessMixin
 
 
 # customer

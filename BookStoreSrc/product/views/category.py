@@ -1,10 +1,10 @@
+from accounts.permissions import UserAccessMixin
 from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView)
 
 from ..forms.category import CategoryCreateForm, CategoryUpdateForm
 from ..models.category import Category
-from accounts.permissions import UserAccessMixin
 
 
 # staff panel
