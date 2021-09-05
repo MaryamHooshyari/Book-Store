@@ -1,5 +1,25 @@
 # Book Store
-### Project tree
+
+## About The Project
+
+This is an ecommerce website for selling books.
+###### homepage
+![my home page](images/home_page.PNG)
+
+It has three kind of users and each has specific permissions.
+* Customers can see all books and their authors and categories, they can add books to their cart, use discount coupons and submit their order.
+* Staff users has permission to add, change, delete and view product and discount app models. but they can't buy products.
+* Admin is a super user which has all permissions but for now I didn't let it to buy products.
+
+### Built With
+
+##### Back end
+* [Python](https://www.python.org/)
+* [Django](https://www.djangoproject.com/)
+##### Front end
+* [Bootstrap](https://getbootstrap.com)
+
+## Project tree
 
  * [BookStoreSrc](./BookStoreSrc/BookStoreSrc)
    * [settings.py](./BookStoreSrc/BookStoreSrc/settings.py)
@@ -40,24 +60,4 @@
  * [order](./BookStoreSrc/order)
  * [discount](./BookStoreSrc/discount)
  * [templates](./dir3)
-
-## About The Project
-
-This is an ecommerce website for selling books.
-###### homepage
-![my home page](images/home_page.PNG)
-
-It has three kind of users and each has specific permissions.
-* Customers can see all books and their authors and categories, they can add books to their cart, use discount coupons and submit their order.
-* Staff users has permission to add, change, delete and view product and discount app models. but they can't buy products.
-* Admin is a super user which has all permissions but for now I didn't let it to buy products.
-
-### Built With
-
-##### Back end
-* [Python](https://www.python.org/)
-* [Django](https://www.djangoproject.com/)
-##### Front end
-* [Bootstrap](https://getbootstrap.com)
-
 
