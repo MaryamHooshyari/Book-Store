@@ -28,7 +28,7 @@ class CustomUserChangeForm(UserChangeForm):
 class StaffCreationForm(CustomUserCreationForm):
     class Meta(CustomUserCreationForm):
         model = CustomUser
-        fields = CustomUserCreationForm.Meta.fields + ('first_name', 'last_name', 'is_staff')
+        fields = CustomUserCreationForm.Meta.fields + ('first_name', 'last_name')
         labels = {
             'email': _('رایانامه')
         }

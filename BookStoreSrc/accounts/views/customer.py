@@ -61,7 +61,6 @@ class CustomerDelete(DeleteView):
 
 
 # address
-# todo: reverse_lazy('address_list')
 class AddressCreate(UserAccessMixin, CreateView):
     raise_exception = False
     permission_required = 'accounts.add_address'

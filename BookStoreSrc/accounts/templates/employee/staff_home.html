@@ -1,6 +1,12 @@
 {% extends 'employee/staff_base.html' %}
 
-{% block title %}پنل کارمندان{% endblock title %}
+{% block title %}
+{% if user.is_superuser %}
+پنل ادمین
+{% else %}
+پنل کارمندان
+{% endif %}
+{% endblock title %}
 
 {% block content %}
 <br><br>
