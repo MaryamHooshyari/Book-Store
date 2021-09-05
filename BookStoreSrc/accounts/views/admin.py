@@ -5,6 +5,7 @@ from datetime import datetime
 
 from BookStoreSrc.settings import BASE_DIR
 from order.models import Order
+from order.serializers import OrderSerializer
 
 import pytz
 
@@ -34,6 +35,11 @@ def json_download_today_submit_orders(request):
     with open(str(BASE_DIR) + '/today_orders.json', "w", encoding='utf-8') as out:
         json_orders = serializers.serialize("json", objects)
         out.write(json_orders)
+    # with open(str(BASE_DIR) + '/today_orders.json', "w", encoding='utf-8') as out:
+    #     serializer = OrderSerializer('json', data=objects)
+    #     if serializer.is_valid():
+    #         json_orders = serializer.data
+    #         out.write(json_orders)
     file_orders = open(str(BASE_DIR) + '/today_orders.json', 'rb')
     response = HttpResponse(file_orders, content_type='json')
     response['Content-Disposition'] = "attachment; filename=today_orders.json" % objects
