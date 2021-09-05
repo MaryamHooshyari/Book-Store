@@ -4,9 +4,9 @@
 
 {% block content %}
 {% if messages %}
-    {% for message in messages %}
-        <p class="bg-danger p-2" > {{ message }} </p>
-    {% endfor %}
+{% for message in messages %}
+<p class="bg-danger p-2"> {{ message }} </p>
+{% endfor %}
 {% endif %}
 <br>
 <h2>{{ order.owner.username }} {{ order.status }}</h2>
@@ -35,16 +35,35 @@
 </table>
 
 {% if order.status == 'سفارش' %}
-<br><div><b>جمع فاکتور: {{order.original_price}} تومان</b></div><br>
+<br>
+<div><b>جمع فاکتور: {{order.original_price}} تومان</b></div><br>
 <form action="{% url 'apply_coupon' %}" method="POST">
     {% csrf_token %}
-    <input id="select" class="me-3" name="coupon" type="text">
+    <input class="me-3" name="coupon" type="text">
     <input value="{{order.pk}}" class="d-none" name="order_id" type="number">
     <input value="اعمال تخفیف" type="submit" class="btn btn-outline-info">
 </form>
-<br><div><b>قابل پرداخت: {{order.final_price}} تومان</b></div><br>
+<br>
+<div><b>قابل پرداخت: {{order.final_price}} تومان</b></div><br>
+<div class="row">
+    <form action="{% url 'apply_address' %}" method="POST" class="col-6">
+        {% csrf_token %}
+        <select id="select" class="me-3" name="order_address">
+            {% for address in user.address.all %}
+            <option value="{{address.pk}}">{{address}}</option>
+            {% endfor %}
+        </select>
+        <input value="{{order.pk}}" class="d-none" name="order_id" type="number">
+        <input value="انتخاب آدرس" type="submit" class="btn btn-outline-info">
+    </form>
+    <a type="button" class="btn btn-outline-success col-2" href="{% url 'address_in_order' %}">افزودن آدرس</a>
+</div>
+<div>آدرس ارسال سفارش: {{order.address}}</div>
+<br>
 <a type="button" class="btn btn-success" href="{% url 'final_submit' order.pk %}">نهایی کردن سفارش</a>
 {% else %}
-<br><div><b>جمع فاکتور: {{order.final_price}} تومان</b></div><br>
+<br>
+<div><b>جمع فاکتور: {{order.final_price}} تومان</b></div><br>
+<div>آدرس ارسال سفارش: {{order.address}}</div>
 {% endif %}
 {% endblock content %}

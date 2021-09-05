@@ -3,7 +3,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from .views.all_user_related import login_redirect, signup, activate
-from .views.customer import (AddressCreate, AddressDelete, AddressList,
+from .views.customer import (AddressCreate, AddressCreateInOrder, AddressDelete, AddressList,
                              AddressUpdate, CustomerDelete, CustomerDetail,
                              CustomerList, CustomerUpdate, OrderList)
 from .views.employee import (StaffCreate, StaffDelete, StaffHome, StaffList,
@@ -36,6 +36,7 @@ urlpatterns += [
 urlpatterns += [
     path('customer/<slug>', CustomerDetail.as_view(), name='user_detail'),
     path('customer/<slug>/addresses/', AddressList.as_view(), name='address_list'),
+    path('customer/order/add-address/', AddressCreateInOrder.as_view(), name='address_in_order'),
     path('customer/<slug>/addresses/create/', AddressCreate.as_view(), name='address_create'),
     path('customer/<slug>/addresses/edit/<int:pk>', AddressUpdate.as_view(), name='address_edit'),
     path('customer/<slug>/addresses/delete/<int:pk>', AddressDelete.as_view(), name='address_delete'),

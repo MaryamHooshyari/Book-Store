@@ -8,6 +8,7 @@ from django.views.generic import (
 
 from ..forms import AddressForm, CustomUserChangeForm
 from ..models import Address, Customer
+from order.models import Order
 
 
 # for admin and staff
@@ -106,3 +107,26 @@ class AddressDelete(UserAccessMixin, DeleteView):
     def get_success_url(self):
         slug = self.request.user.slug
         return reverse_lazy('address_list', kwargs={'slug': slug})
+
+
+# in_order
+class AddressCreateInOrder(UserAccessMixin, CreateView):
+    raise_exception = False
+    permission_required = 'accounts.add_address'
+
+    form_class = AddressForm
+    model = Address
+    template_name = 'customer/address_create.html'
+
+    def post(self, request, *args, **kwargs):
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.owner = request.user
+            address.save()
+            order = Order.objects.get(owner=request.user, status='سفارش')
+            return redirect('order_detail', order.pk)
+        else:
+            messages.error(request, 'آدرس ثبت نشد:(')
+            form = AddressForm()
+            return render(request, 'customer/address_create.html', {'form': form})

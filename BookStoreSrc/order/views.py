@@ -4,6 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView
 from product.models.book import Book
 from discount.models import BonusDiscount
+from accounts.models import Address
 
 from .models import Order, OrderItem
 
@@ -103,3 +104,12 @@ def final_submit(request, pk):
     my_order.status = 'ثبت شده'
     my_order.save()
     return redirect('order_detail', pk)
+
+
+def apply_address(request):
+    if request.method == 'POST':
+        my_order = Order.objects.get(id=request.POST['order_id'])
+        my_address = Address.objects.get(id=request.POST['order_address'])
+        my_order.address = my_address
+        my_order.save()
+        return redirect('order_detail', my_order.pk)
