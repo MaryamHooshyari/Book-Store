@@ -39,11 +39,6 @@ class Book(models.Model):
         return reverse('book_detail', kwargs={'slug': self.slug})
 
     def save(self, *args, **kwargs):
-        # total_discount = 0
-        # for x in self.book_off.all():
-        #     total_discount += x.discount_price
-        # if self.unit_price > total_discount:
-        #     self.final_price = self.unit_price - total_discount
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)

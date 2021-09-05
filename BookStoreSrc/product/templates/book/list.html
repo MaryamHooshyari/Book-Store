@@ -22,10 +22,10 @@
             {% endfor %}
         </p>
         {% if book.unit_price == book.final_price %}
-        <p class="fw-bold ms-4">{{ book.unit_price }}</p>
+        <p class="fw-bold ms-4">{{ book.unit_price }} تومان</p>
         {% else %}
-        <p class="text-decoration-line-through ms-4">{{ book.unit_price }}</p>
-        <p class="fw-bold ms-4">{{ book.final_price }}</p>
+        <p class="text-decoration-line-through ms-4">{{ book.unit_price }} تومان</p>
+        <p class="fw-bold ms-4">{{ book.final_price }} تومان</p>
         {% endif %}
         <br>
     </div>

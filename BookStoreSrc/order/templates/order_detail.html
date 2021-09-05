@@ -3,6 +3,11 @@
 {% block title %}{{ order.status }}{% endblock title %}
 
 {% block content %}
+{% if messages %}
+    {% for message in messages %}
+        <p class="bg-danger p-2" > {{ message }} </p>
+    {% endfor %}
+{% endif %}
 <br>
 <h2>{{ order.owner.username }} {{ order.status }}</h2>
 <br><br>
@@ -28,4 +33,18 @@
     {% endfor %}
     </tbody>
 </table>
+
+{% if order.status == 'سفارش' %}
+<br><div><b>جمع فاکتور: {{order.original_price}} تومان</b></div><br>
+<form action="{% url 'apply_coupon' %}" method="POST">
+    {% csrf_token %}
+    <input id="select" class="me-3" name="coupon" type="text">
+    <input value="{{order.pk}}" class="d-none" name="order_id" type="number">
+    <input value="اعمال تخفیف" type="submit" class="btn btn-outline-info">
+</form>
+<br><div><b>قابل پرداخت: {{order.final_price}} تومان</b></div><br>
+<a type="button" class="btn btn-success" href="{% url 'final_submit' order.pk %}">نهایی کردن سفارش</a>
+{% else %}
+<br><div><b>جمع فاکتور: {{order.final_price}} تومان</b></div><br>
+{% endif %}
 {% endblock content %}

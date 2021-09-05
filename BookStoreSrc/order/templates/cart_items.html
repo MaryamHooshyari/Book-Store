@@ -3,14 +3,41 @@
 {% block title %}سبد خرید{% endblock title %}
 
 {% block content %}
-<h1>cart</h1>
-{% for item in cart %}
-{% with book=item.book %}
-<div class="row">
-    <a class="col">{{book.title}}</a>
-    <span class="col">{{item.book_qty}}</span>
-</div>
-{% endwith %}
-{% endfor %}
-<div> total: {{}}</div>
+<br>
+<h2>{{ cart.owner.username }} {{ cart.status }}</h2>
+<br><br>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">محصول</th>
+        <th scope="col">قیمت واحد</th>
+        <th scope="col">قیمت با تخفیف</th>
+        <th scope="col">تعداد</th>
+        <th scope="col">قیمت کل</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in cart.items.all %}
+    <tr>
+        <th scope="row">{{ item.book.title }}</th>
+        <td>{{ item.book.unit_price }}</td>
+        <td>{{ item.book.final_price }}</td>
+        <td>
+            <form action="{% url 'in_cart_add' %}" method="POST">
+                {% csrf_token %}
+                <input value="{{item.quantity}}" id="select" class="me-3" name="quantity" type="number" min="1"
+                       max="{{item.book.number_in_stock}}">
+                <input value="{{item.book.id}}" class="d-none" name="book_id" type="number">
+                <input value="به روز رسانی" type="submit" class="btn btn-outline-success">
+            </form>
+        </td>
+        <td>{{ item.item_price }}</td>
+        <td><a type="button" class="btn btn-outline-danger" href="{% url 'order_item_delete' item.pk %}">حذف</a></td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br><div><b>جمع فاکتور: {{cart.original_price}} تومان</b></div><br>
+<a type="button" class="btn btn-success" href="{% url 'submit_order' %}">ثبت سفارش</a>
 {% endblock content %}
