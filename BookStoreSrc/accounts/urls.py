@@ -8,6 +8,7 @@ from .views.customer import (AddressCreate, AddressCreateInOrder, AddressDelete,
                              CustomerList, CustomerUpdate, OrderList)
 from .views.employee import (StaffCreate, StaffDelete, StaffHome, StaffList,
                              StaffUpdate)
+from .views.admin import admin_report, json_download_today_submit_orders
 
 # all users
 urlpatterns = [
@@ -20,7 +21,8 @@ urlpatterns = [
 # admin
 urlpatterns += [
     path('admin/django-admin/', admin.site.urls),
-    path('admin/report/', TemplateView.as_view(template_name='admin/admin_report.html'), name='admin_report'),
+    path('admin/report/', admin_report, name='admin_report'),
+    path('admin/dl-today-orders/', json_download_today_submit_orders, name='today_orders_dl'),
 ]
 
 # staff
