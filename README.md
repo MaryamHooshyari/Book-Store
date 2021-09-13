@@ -4,11 +4,11 @@
 
 This is an ecommerce website for selling books.
 ###### homepage
-![my home page](images/home_page.PNG)
+![my home page](READMEimages/home_page.PNG)
 
 It has three kind of users and each has specific permissions.
 * Customers can see all books and their authors and categories, they can add books to their cart, use discount coupons and submit their order.
-* Staff users has permission to add, change, delete and view product and discount app models. but they can't buy products.
+* Staff users has permission to add, change, delete and view product and discount app models. but they can't buy products for now.
 * Admin is a super user which has all permissions but for now I didn't let it to buy products.
 
 ### Built With
